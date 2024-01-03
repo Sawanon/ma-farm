@@ -36,7 +36,7 @@ const database = getDatabase(app);
 function App() {
   const [springerStatus, setSpringerStatus] = useState(false)
   const [isWaterStatus, setIsWaterStatus] = useState(false)
-  const [isCheck, setIsCheck] = useState(false)
+  const [springer, setSpringer] = useState(false)
   const [isWater, setIsWater] = useState(false)
   const [humidity, setHumidity] = useState(0)
   const [temperature, setTemperature] = useState("0")
@@ -50,12 +50,14 @@ function App() {
       setIsWaterStatus(data.relayDust)
       setHumidity(data.relative_humidity)
       setTemperature(data.temperature)
+      setSpringer(data.springer)
+      setIsWater(data.isWater)
     });
   }, [])
 
   const handleOnChangeSpringer = () => {
-    setIsCheck(prev => !prev)
-    set(ref(database, 'real/springer'), !isCheck)
+    setSpringer(prev => !prev)
+    set(ref(database, 'real/springer'), !springer)
   }
 
   const handleOnChangeGreenHouse = () => {
@@ -79,7 +81,7 @@ function App() {
             Springer water
           </div>
           <Switch
-            value={isCheck}
+            value={springer}
             onClick={handleOnChangeSpringer}
           />
           <div className={`${springerStatus ? 'bg-red-500' : 'bg-green-500'} w-4 h-4 rounded-full`}>

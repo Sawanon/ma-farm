@@ -117,7 +117,7 @@ function App() {
               Temperature
             </div>
             <div>
-              {`${temperature}%`}
+              {`${temperature} C`}
             </div>
           </div>
           <div className={`mt-2 relative bg-gradient-to-r from-green-500 from-[27%] to-red-500 h-6 rounded-3xl flex justify-end`}>

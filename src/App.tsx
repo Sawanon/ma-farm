@@ -4,6 +4,8 @@ import { IoRefreshOutline } from "react-icons/io5";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getDatabase, onValue, ref, set } from 'firebase/database';
+import Switch from './components/Switch';
+import ControlCard from './components/ControlCard';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -76,6 +78,7 @@ function App() {
             <IoRefreshOutline />
           </div>
         </div>
+        <ControlCard />
         <div className={`mt-4 bg-white shadow text-black text-opacity-80 rounded-lg p-4 flex justify-between items-center`}>
           <div>
             Springer water
@@ -130,20 +133,3 @@ function App() {
 }
 
 export default App
-
-const Switch = ({
-  value,
-  onClick,
-} : {
-  value: boolean,
-  onClick: () => void,
-}) => {
-  return (
-    <div onClick={onClick} className={`${value ? 'bg-green-400' : 'bg-gray-300'} w-12 h-7 rounded-3xl relative transition-all flex`}>
-      <div className={`bg-white rounded-full w-6 h-6 mt-[2px] absolute ${value ? 'left-[calc(100%-26px)]' : 'left-[2px]'}`}></div>
-      {/* <div className={`absolute`}>
-        {`${value}`}
-      </div> */}
-    </div>
-  )
-}

@@ -4,10 +4,13 @@ import { IoRefreshOutline } from "react-icons/io5";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getDatabase, onValue, ref, set } from 'firebase/database';
-import Switch from './components/Switch';
+
 import ControlCard from './components/ControlCard';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
+
+import { GiHeavyRain } from 'react-icons/gi'
+import { BsStars } from "react-icons/bs";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -36,9 +39,9 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
 function App() {
-  const [springerStatus, setSpringerStatus] = useState(false)
+  // const [springerStatus, setSpringerStatus] = useState(false)
   const [isWaterStatus, setIsWaterStatus] = useState(false)
-  const [springer, setSpringer] = useState(false)
+  // const [springer, setSpringer] = useState(false)
   const [isWater, setIsWater] = useState(false)
   const [humidity, setHumidity] = useState(0)
   const [temperature, setTemperature] = useState("0")
@@ -48,19 +51,19 @@ function App() {
     onValue(realData, (snapshot) => {
       const data:RealData = snapshot.val();
       console.log("ma data", data);
-      setSpringerStatus(data.relayStringer)
+      // setSpringerStatus(data.relayStringer)
       setIsWaterStatus(data.relayDust)
       setHumidity(data.relative_humidity)
       setTemperature(data.temperature)
-      setSpringer(data.springer)
+      // setSpringer(data.springer)
       setIsWater(data.isWater)
     });
   }, [])
 
-  const handleOnChangeSpringer = () => {
-    setSpringer(prev => !prev)
-    set(ref(database, 'real/springer'), !springer)
-  }
+  // const handleOnChangeSpringer = () => {
+  //   setSpringer(prev => !prev)
+  //   set(ref(database, 'real/springer'), !springer)
+  // }
 
   const handleOnChangeGreenHouse = () => {
     setIsWater(prev => !prev)
@@ -78,8 +81,24 @@ function App() {
             <IoRefreshOutline />
           </div>
         </div>
-        <ControlCard />
-        <div className={`mt-4 bg-white shadow text-black text-opacity-80 rounded-lg p-4 flex justify-between items-center`}>
+        <div className={`mt-4`}>
+          <div className={`flex gap-2 items-center`}>
+            <div>
+              New style !
+            </div>
+            <div className={`text-yellow-400 text-lg`}>
+              <BsStars />
+            </div>
+          </div>
+          <ControlCard
+            Icon={GiHeavyRain}
+            className={`${isWaterStatus ? 'bg-white' : 'bg-blue-600 text-white'}`}
+            label='Spray water'
+            onClick={handleOnChangeGreenHouse}
+            value={isWater}
+          />
+        </div>
+        {/* <div className={`mt-4 bg-white shadow text-black text-opacity-80 rounded-lg p-4 flex justify-between items-center`}>
           <div>
             Springer water
           </div>
@@ -89,8 +108,8 @@ function App() {
           />
           <div className={`${springerStatus ? 'bg-red-500' : 'bg-green-500'} w-4 h-4 rounded-full`}>
           </div>
-        </div>
-        <div className={`mt-4 bg-white shadow text-black text-opacity-80 rounded-lg p-4 flex justify-between items-center`}>
+        </div> */}
+        {/* <div className={`mt-4 bg-white shadow text-black text-opacity-80 rounded-lg p-4 flex justify-between items-center`}>
           <div>
             Water in greenhouse
           </div>
@@ -100,7 +119,7 @@ function App() {
           />
           <div className={`${isWaterStatus ? 'bg-red-500' : 'bg-green-500'} w-4 h-4 rounded-full`}>
           </div>
-        </div>
+        </div> */}
         <div className={`mt-4 shadow bg-white w-full text-black text-opacity-80 p-4 rounded-lg`}>
           <div className={`flex justify-between items-center`}>
             <div>

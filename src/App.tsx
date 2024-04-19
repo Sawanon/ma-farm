@@ -12,6 +12,10 @@ import ControlCard from './components/ControlCard';
 import { GiHeavyRain } from 'react-icons/gi'
 import { BsStars } from "react-icons/bs";
 
+import { FaTemperatureLow } from "react-icons/fa"
+import { IoWater } from "react-icons/io5";
+import TableHistory from './components/TableHistory';
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCqDOZwPNUnOl-r-J1p5fUIvcM7TRE2mKs",
@@ -60,11 +64,6 @@ function App() {
     });
   }, [])
 
-  // const handleOnChangeSpringer = () => {
-  //   setSpringer(prev => !prev)
-  //   set(ref(database, 'real/springer'), !springer)
-  // }
-
   const handleOnChangeGreenHouse = () => {
     setIsWater(prev => !prev)
     set(ref(database, 'real/isWater'), !isWater)
@@ -98,32 +97,15 @@ function App() {
             value={isWater}
           />
         </div>
-        {/* <div className={`mt-4 bg-white shadow text-black text-opacity-80 rounded-lg p-4 flex justify-between items-center`}>
-          <div>
-            Springer water
-          </div>
-          <Switch
-            value={springer}
-            onClick={handleOnChangeSpringer}
-          />
-          <div className={`${springerStatus ? 'bg-red-500' : 'bg-green-500'} w-4 h-4 rounded-full`}>
-          </div>
-        </div> */}
-        {/* <div className={`mt-4 bg-white shadow text-black text-opacity-80 rounded-lg p-4 flex justify-between items-center`}>
-          <div>
-            Water in greenhouse
-          </div>
-          <Switch
-            value={isWater}
-            onClick={handleOnChangeGreenHouse}
-          />
-          <div className={`${isWaterStatus ? 'bg-red-500' : 'bg-green-500'} w-4 h-4 rounded-full`}>
-          </div>
-        </div> */}
         <div className={`mt-4 shadow bg-white w-full text-black text-opacity-80 p-4 rounded-lg`}>
           <div className={`flex justify-between items-center`}>
-            <div>
-              Humidity
+            <div className={`flex gap-2 items-center`}>
+              <div>
+                <IoWater />
+              </div>
+              <div>
+                Humidity
+              </div>
             </div>
             <div>
               {`${humidity}%`}
@@ -135,8 +117,13 @@ function App() {
         </div>
         <div className={`mt-4 shadow bg-white w-full text-black text-opacity-80 p-4 rounded-lg`}>
           <div className={`flex justify-between items-center`}>
-            <div>
-              Temperature
+            <div className={`flex gap-2 items-center`}>
+              <div>
+                <FaTemperatureLow />
+              </div>
+              <div>
+                Temperature
+              </div>
             </div>
             <div>
               {`${temperature} C`}
@@ -145,6 +132,9 @@ function App() {
           <div className={`mt-2 relative bg-gradient-to-r from-green-500 from-[27%] to-red-500 h-6 rounded-3xl flex justify-end`}>
             <div style={{left: `${temperature}%`}} className={`w-px h-8 bg-red-700 absolute -top-1`}></div>
           </div>
+        </div>
+        <div className={`mt-4`}>
+          <TableHistory />
         </div>
       </div>
     </div>
